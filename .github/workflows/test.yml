@@ -30,15 +30,15 @@ jobs:
 
       - name: Lint with Ruff
         run: |
-          uv run ruff check .
+          uv run ruff check . --exclude sample
 
       - name: Format with Ruff
         run: |
-          uv run ruff format --check .
+          uv run ruff format --check . --exclude sample
 
       - name: Type check with mypy
         run: |
-          uv run mypy alpaca_backtrader_api/
+          uv run mypy alpaca_backtrader_api/ --exclude sample
 
       - name: Test with pytest
         run: |

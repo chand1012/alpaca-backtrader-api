@@ -1,6 +1,8 @@
-import alpaca_backtrader_api
-import backtrader as bt
 from datetime import datetime
+
+import backtrader as bt
+
+import alpaca_backtrader_api
 
 
 # Your credentials here
@@ -14,26 +16,26 @@ You have 3 options:
 """
 IS_BACKTEST = True
 IS_LIVE = False
-SYMBOL1 = 'AAPL'
-SYMBOL2 = 'GOOG'
+SYMBOL1 = "AAPL"
+SYMBOL2 = "GOOG"
 
 
 class SmaCross1(bt.Strategy):
     # list of parameters which are configurable for the strategy
     params = dict(
         pfast=10,  # period for the fast moving average
-        pslow=30   # period for the slow moving average
+        pslow=30,  # period for the slow moving average
     )
 
     def log(self, txt, dt=None):
         dt = dt or self.data.datetime[0]
         dt = bt.num2date(dt)
-        print('%s, %s' % (dt.isoformat(), txt))
+        print("%s, %s" % (dt.isoformat(), txt))
 
     def notify_trade(self, trade):
-        self.log("placing trade for {}. target size: {}".format(
-            trade.getdataname(),
-            trade.size))
+        self.log(
+            f"placing trade for {trade.getdataname()}. target size: {trade.size}"
+        )
 
     def notify_order(self, order):
         print(f"Order notification. status{order.getstatusname()}.")
@@ -44,10 +46,10 @@ class SmaCross1(bt.Strategy):
         self.log(msg)
 
     def stop(self):
-        print('==================================================')
-        print('Starting Value - %.2f' % self.broker.startingcash)
-        print('Ending   Value - %.2f' % self.broker.getvalue())
-        print('==================================================')
+        print("==================================================")
+        print("Starting Value - %.2f" % self.broker.startingcash)
+        print("Ending   Value - %.2f" % self.broker.getvalue())
+        print("==================================================")
 
     def __init__(self):
         self.live_bars = False
@@ -61,7 +63,7 @@ class SmaCross1(bt.Strategy):
 
     def notify_data(self, data, status, *args, **kwargs):
         super().notify_data(data, status, *args, **kwargs)
-        print('*' * 5, 'DATA NOTIF:', data._getstatusname(status), *args)
+        print("*" * 5, "DATA NOTIF:", data._getstatusname(status), *args)
         if data._getstatusname(status) == "LIVE":
             self.live_bars = True
 
@@ -85,9 +87,10 @@ class SmaCross1(bt.Strategy):
             self.close(data=data1)  # close long position
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import logging
-    logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+
+    logging.basicConfig(format="%(asctime)s %(message)s", level=logging.INFO)
     cerebro = bt.Cerebro()
     cerebro.addstrategy(SmaCross1)
 
@@ -99,30 +102,38 @@ if __name__ == '__main__':
 
     DataFactory = store.getdata  # or use alpaca_backtrader_api.AlpacaData
     if not IS_BACKTEST:
-        data0 = DataFactory(dataname=SYMBOL1,
-                            historical=False,
-                            timeframe=bt.TimeFrame.Ticks,
-                            backfill_start=False,
-                            data_feed='iex')
-        data1 = DataFactory(dataname=SYMBOL2,
-                            historical=False,
-                            timeframe=bt.TimeFrame.Ticks,
-                            backfill_start=False,
-                            data_feed='iex')
+        data0 = DataFactory(
+            dataname=SYMBOL1,
+            historical=False,
+            timeframe=bt.TimeFrame.Ticks,
+            backfill_start=False,
+            data_feed="iex",
+        )
+        data1 = DataFactory(
+            dataname=SYMBOL2,
+            historical=False,
+            timeframe=bt.TimeFrame.Ticks,
+            backfill_start=False,
+            data_feed="iex",
+        )
         # or just alpaca_backtrader_api.AlpacaBroker()
         broker = store.getbroker()
         cerebro.setbroker(broker)
     else:
-        data0 = DataFactory(dataname=SYMBOL1,
-                            historical=True,
-                            fromdate=datetime(2015, 1, 1),
-                            timeframe=bt.TimeFrame.Days,
-                            data_feed='iex')
-        data1 = DataFactory(dataname=SYMBOL2,
-                            historical=True,
-                            fromdate=datetime(2015, 1, 1),
-                            timeframe=bt.TimeFrame.Days,
-                            data_feed='iex')
+        data0 = DataFactory(
+            dataname=SYMBOL1,
+            historical=True,
+            fromdate=datetime(2015, 1, 1),
+            timeframe=bt.TimeFrame.Days,
+            data_feed="iex",
+        )
+        data1 = DataFactory(
+            dataname=SYMBOL2,
+            historical=True,
+            fromdate=datetime(2015, 1, 1),
+            timeframe=bt.TimeFrame.Days,
+            data_feed="iex",
+        )
     cerebro.adddata(data0)
     cerebro.adddata(data1)
 
@@ -130,7 +141,7 @@ if __name__ == '__main__':
         # backtrader broker set initial simulated cash
         cerebro.broker.setcash(100000.0)
 
-    print('Starting Portfolio Value: {}'.format(cerebro.broker.getvalue()))
+    print(f"Starting Portfolio Value: {cerebro.broker.getvalue()}")
     cerebro.run()
-    print('Final Portfolio Value: {}'.format(cerebro.broker.getvalue()))
+    print(f"Final Portfolio Value: {cerebro.broker.getvalue()}")
     cerebro.plot()

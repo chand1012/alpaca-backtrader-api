@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Alpaca Backtrader API
+
+This allow the Alpaca broker to interact properly with the backtrader backtesting and trading bot interface. For this newly updated version we use uv for package management and deployment to pypi.
+
+## Adding dependencies
+
+`uv add <package name>`
+
+## Initializing a new dev environment
+
+`uv sync`

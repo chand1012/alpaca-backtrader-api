@@ -1,6 +1,6 @@
-![Build](https://img.shields.io/badge/build-passing-green)
+[![Build](https://github.com/chand1012/alpaca-backtrader-api/actions/workflows/build.yml/badge.svg)](https://github.com/chand1012/alpaca-backtrader-api/actions/workflows/build.yml)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
 # Alpaca Backtrader API
 
@@ -13,7 +13,7 @@ A Python library that provides seamless integration between Alpaca Markets and t
 - **Live Trading**: Execute real trades through Alpaca's brokerage
 - **Modern Backend**: Built on the official `alpaca-py` library (v0.16.0+)
 - **Backward Compatible**: Drop-in replacement for existing code using v0.15.x
-- **Python 3.8+**: Supports modern Python versions (3.8-3.12)
+- **Python 3.10+**: Supports modern Python versions (3.10-3.13)
 
 ## Installation
 

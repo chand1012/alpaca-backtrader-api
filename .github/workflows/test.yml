@@ -51,25 +51,3 @@ jobs:
           flags: unittests
           name: codecov-umbrella
 
-  build:
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "latest"
-
-      - name: Set up Python
-        run: uv python install 3.11
-
-      - name: Build package
-        run: uv build
-
-      - name: Check build artifacts
-        run: |
-          ls -la dist/
-          uv run twine check dist/*

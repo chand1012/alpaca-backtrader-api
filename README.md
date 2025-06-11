@@ -21,10 +21,10 @@ A Python library that provides seamless integration between Alpaca Markets and t
 
 ```bash
 # Add to existing project
-uv add alpaca-backtrader-api
+uv add git+https://github.com/chand1012/alpaca-backtrader-api.git
 
 # Or install for development
-git clone https://github.com/alpacahq/alpaca-backtrader-api.git
+git clone https://github.com/chand1012/alpaca-backtrader-api.git
 cd alpaca-backtrader-api
 uv sync --dev
 ```
@@ -32,7 +32,7 @@ uv sync --dev
 ### Using pip
 
 ```bash
-pip install alpaca-backtrader-api
+pip install git+https://github.com/chand1012/alpaca-backtrader-api.git
 ```
 
 ## Quick Start

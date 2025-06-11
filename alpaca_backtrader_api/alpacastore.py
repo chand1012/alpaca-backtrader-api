@@ -220,7 +220,7 @@ class AlpacaStore(with_metaclass(MetaSingleton, object)):
         self._env = None  # reference to cerebro for general notifications
         self.broker = None  # broker instance
         self.datas = list()  # datas that have registered over start
-
+        self.p = self.params
         self._orders = collections.OrderedDict()  # map order.ref to oid
         self._ordersrev = collections.OrderedDict()  # map oid to order.ref
         self._transpend = collections.defaultdict(collections.deque)
